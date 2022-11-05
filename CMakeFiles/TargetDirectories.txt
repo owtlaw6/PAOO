@@ -1,0 +1,3 @@
+/home/diana/Downloads/tema1PAOO/CMakeFiles/tema1.dir
+/home/diana/Downloads/tema1PAOO/CMakeFiles/edit_cache.dir
+/home/diana/Downloads/tema1PAOO/CMakeFiles/rebuild_cache.dir
