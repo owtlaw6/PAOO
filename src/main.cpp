@@ -1,9 +1,6 @@
-//ceva
 #include <iostream>
 #include <vector>
 #include <math.h>
-
-using namespace std;
 
 class RegularShape
 {
@@ -13,26 +10,28 @@ public:
     {
         side_ = new int;
         *side_ = side;
-        cout << '\n' << "Constructor la RegularShape cu side = " << *side_;
+        std::cout << '\n' << "Constructor la RegularShape cu side = " << *side_;
     }
-    RegularShape(const RegularShape& shape) : RegularShape{ *shape.side_ }
+    RegularShape(const RegularShape& shape) : RegularShape(*shape.side_)
     {
-        cout << '\n' << "Copy constructor la RegularShape cu side = " << *side_ ;
+        std::cout << '\n' << "Copy constructor la RegularShape cu side = " << *side_ ;
     }
-    RegularShape(const RegularShape&& shape) : side_(shape.side_)
+    RegularShape(const RegularShape&& shape)
     {
-        cout << '\n' << "Move constructor la RegularShape cu side = " << *side_;
+        side_ = new int;
+        *side_ = *shape.side_;
+        std::cout << '\n' << "Move constructor la RegularShape cu side = " << *side_;
     }
 
     ~RegularShape()
     {
-        cout << '\n' << "Destructor la RegularShape cu side = " << *side_;
+        std::cout << '\n' << "Destructor la RegularShape cu side = " << *side_;
         delete side_;
     }
 
     virtual void writeDetails()
     {
-        cout << '\n' << "base class cu side = " << *side_ << '\n';
+        std::cout << '\n' << "base class cu side = " << *side_ << '\n';
     }
 
 protected:
@@ -45,26 +44,26 @@ public:
     EquilateralTriangle() = delete;
     EquilateralTriangle(int side) : RegularShape(side)
     {
-        cout << '\n' << "Constructor la EquilateralTriangle cu side = " << *side_;
+        std::cout << '\n' << "Constructor la EquilateralTriangle cu side = " << *side_;
     }
     EquilateralTriangle(const EquilateralTriangle& shape) : RegularShape(*shape.side_)
     {
-        cout << '\n' << "Copy constructor la EquilateralTriangle cu side = " << *side_;
+        std::cout << '\n' << "Copy constructor la EquilateralTriangle cu side = " << *side_;
     }
-    EquilateralTriangle(const EquilateralTriangle&& shape) : RegularShape(shape)
+    EquilateralTriangle(const EquilateralTriangle&& shape) : RegularShape(std::move(shape))
     {
-        cout << '\n' << "Move constructor la EquilateralTriangle cu side = " << *side_;
+        std::cout << '\n' << "Move constructor la EquilateralTriangle cu side = " << *side_;
     }
 
     ~EquilateralTriangle()
     {
-        cout << '\n' << "Destructor la EquilateralTriangle cu side = " << *side_;
+        std::cout << '\n' << "Destructor la EquilateralTriangle cu side = " << *side_;
     }
 
     void writeDetails()
     {
-        cout << '\n' << "perimeter of equilateral triangle: " << 3 * (*side_) << '\n';
-        cout << "area of equilateral triangle: " << ((*side_) * (*side_) * sqrt(3)/4) << '\n' << '\n';
+        std::cout << '\n' << "perimeter of equilateral triangle: " << 3 * (*side_) << '\n';
+        std::cout << "area of equilateral triangle: " << ((*side_) * (*side_) * sqrt(3)/4) << '\n' << '\n';
     }
 };
 
@@ -74,26 +73,26 @@ public:
     Square() = delete;
     Square(int side) : RegularShape(side)
     {
-        cout << '\n' << "Constructor la Square cu side = " << *side_;
+        std::cout << '\n' << "Constructor la Square cu side = " << *side_;
     }
     Square(const Square& shape) : RegularShape(*shape.side_)
     {
-        cout << '\n' << "Copy constructor la Square cu side = " << *side_;
+        std::cout << '\n' << "Copy constructor la Square cu side = " << *side_;
     }
-    Square(const Square&& shape) : RegularShape(*shape.side_)
+    Square(const Square&& shape) : RegularShape(std::move(shape))
     {
-        cout << '\n' << "Move constructor la Square cu side = " << *side_;
+        std::cout << '\n' << "Move constructor la Square cu side = " << *side_;
     }
 
     ~Square()
     {
-        cout << '\n' << "Destructor la Square cu side = " << *side_;
+        std::cout << '\n' << "Destructor la Square cu side = " << *side_;
     }
 
     void writeDetails()
     {
-        cout << '\n' << "perimeter of square: " << 4 * (*side_) << '\n';
-        cout << "area of square: " << ((*side_) * (*side_)) << '\n' << '\n';
+        std::cout << '\n' << "perimeter of square: " << 4 * (*side_) << '\n';
+        std::cout << "area of square: " << ((*side_) * (*side_)) << '\n' << '\n';
     }
 };
 
@@ -103,34 +102,47 @@ public:
     Hexagon() = delete;
     Hexagon(int side) : RegularShape(side)
     {
-        cout << '\n' << "Constructor la Hexagon cu side = " << *side_;
+        std::cout << '\n' << "Constructor la Hexagon cu side = " << *side_;
     }
     Hexagon(const Hexagon& shape) : RegularShape(*shape.side_)
     {
-        cout << '\n' << "Copy constructor la Hexagon cu side = " << *side_;
+        std::cout << '\n' << "Copy constructor la Hexagon cu side = " << *side_;
     }
-    Hexagon(const Hexagon&& shape) : RegularShape(*shape.side_)
+    Hexagon(const Hexagon&& shape) : RegularShape(std::move(shape))
     {
-        cout << '\n' << "Move constructor la Hexagon cu side = " << *side_;
+        std::cout << '\n' << "Move constructor la Hexagon cu side = " << *side_;
     }
 
     ~Hexagon()
     {
-        cout << '\n' << "Destructor la Hexagon cu side = " << *side_;
+        std::cout << '\n' << "Destructor la Hexagon cu side = " << *side_;
     }
 
     void writeDetails()
     {
-        cout << '\n' << "perimeter of hexagon: " << 6 * (*side_) << '\n';
-        cout << "area of hexagon: " << (3 * sqrt(3) * (*side_) * (*side_) / 2) << '\n' << '\n';
+        std::cout << '\n' << "perimeter of hexagon: " << 6 * (*side_) << '\n';
+        std::cout << "area of hexagon: " << (3 * sqrt(3) * (*side_) * (*side_) / 2) << '\n' << '\n';
     }
 };
 
 int main()
 {
-    vector<EquilateralTriangle> shapes;
-    shapes.push_back(EquilateralTriangle(20));
-    cout << '\n' << '\n';
+    std::vector<RegularShape> shapes;
+    shapes.push_back(RegularShape(10101));
+    std::cout << '\n' << '\n';
+
+    EquilateralTriangle triangle0(200);
+    std::vector<EquilateralTriangle> triangles;
+    triangles.push_back(std::move(triangle0));
+    std::cout << '\n' << '\n';
+
+    std::vector<Square> squares;
+    squares.push_back(Square(201));
+    std::cout << '\n' << '\n';
+
+    std::vector<Hexagon> hexagons;
+    hexagons.push_back(Hexagon(202));
+    std::cout << '\n' << '\n';
 
     EquilateralTriangle triangle1(5);
     triangle1.writeDetails();
@@ -138,6 +150,12 @@ int main()
     EquilateralTriangle triangle2(triangle1);
     triangle2.writeDetails();
 
+    {
+        Square square0(88);
+        square0.writeDetails();
+    }
+
+    std::cout << '\n' << '\n';
     RegularShape *square = new Square(2);
     square->writeDetails();
     
@@ -148,7 +166,7 @@ int main()
     regShape->writeDetails();
 
     delete regShape;
-    cout << '\n' << '\n';
+    std::cout << '\n' << '\n';
 
     regShape = new EquilateralTriangle(10000);
     regShape->writeDetails();
