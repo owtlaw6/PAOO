@@ -23,6 +23,19 @@ public:
         std::cout << '\n' << "Move constructor la RegularShape cu side = " << *side_;
     }
 
+    RegularShape &operator=(RegularShape const& F)
+    {
+        if(&F != this)
+        {
+            delete side_;
+            side_ = new int(*F.side_);
+            std::cout << "\ncopy assignment in RegularShape";
+            return *this;
+        }
+        std::cout << "\nself assignment in RegularShape";
+        return *this;
+    }
+
     ~RegularShape()
     {
         std::cout << '\n' << "Destructor la RegularShape cu side = " << *side_;
@@ -55,6 +68,19 @@ public:
         std::cout << '\n' << "Move constructor la EquilateralTriangle cu side = " << *side_;
     }
 
+    EquilateralTriangle &operator=(EquilateralTriangle const& F)
+    {
+        if(&F != this)
+        {
+            delete side_;
+            side_ = new int(*F.side_);
+            std::cout << "\ncopy assignment in EquilateralTriangle";
+            return *this;
+        }
+        std::cout << "\nself assignment in EquilateralTriangle";
+        return *this;
+    }
+
     ~EquilateralTriangle()
     {
         std::cout << '\n' << "Destructor la EquilateralTriangle cu side = " << *side_;
@@ -84,6 +110,19 @@ public:
         std::cout << '\n' << "Move constructor la Square cu side = " << *side_;
     }
 
+    Square &operator=(Square const& F)
+    {
+        if(&F != this)
+        {
+            delete side_;
+            side_ = new int(*F.side_);
+            std::cout << "\ncopy assignment in Square";
+            return *this;
+        }
+        std::cout << "\nself assignment in Square";
+        return *this;
+    }
+
     ~Square()
     {
         std::cout << '\n' << "Destructor la Square cu side = " << *side_;
@@ -111,6 +150,19 @@ public:
     Hexagon(const Hexagon&& shape) : RegularShape(std::move(shape))
     {
         std::cout << '\n' << "Move constructor la Hexagon cu side = " << *side_;
+    }
+
+    Hexagon &operator=(Hexagon const& F)
+    {
+        if(&F != this)
+        {
+            delete side_;
+            side_ = new int(*F.side_);
+            std::cout << "\ncopy assignment in Hexagon";
+            return *this;
+        }
+        std::cout << "\nself assignment in Hexagon";
+        return *this;
     }
 
     ~Hexagon()
@@ -174,6 +226,28 @@ int main()
     delete square;
     delete hexagon;
     delete regShape;
+
+    std::cout << "\n\n\ntema2\n";
+    RegularShape copyRegularShape1(1), copyRegularShape2(2), copyRegularShape3(3), copyRegularShape4(4);
+    copyRegularShape1 = copyRegularShape2 = copyRegularShape3 = copyRegularShape4;
+    copyRegularShape1.writeDetails();
+    copyRegularShape1 = copyRegularShape1;
+    copyRegularShape1.writeDetails();
+
+    EquilateralTriangle copyEquilateralTriangle1(11), copyEquilateralTriangle2(22);
+    EquilateralTriangle copyEquilateralTriangle3(33), copyEquilateralTriangle4(44);
+    copyEquilateralTriangle4.writeDetails();
+    copyEquilateralTriangle1 = copyEquilateralTriangle2 = copyEquilateralTriangle3 = copyEquilateralTriangle4;
+    copyEquilateralTriangle1.writeDetails();
+    copyEquilateralTriangle1 = copyEquilateralTriangle1;
+    copyEquilateralTriangle1.writeDetails();
+
+    Hexagon copyHexagon1(111), copyHexagon2(222), copyHexagon3(333), copyHexagon4(444);
+    copyHexagon4.writeDetails();
+    copyHexagon1 = copyHexagon2 = copyHexagon3 = copyHexagon4;
+    copyHexagon1.writeDetails();
+    copyHexagon1 = copyHexagon1;
+    copyHexagon1.writeDetails();
 
     return 0;
 }
