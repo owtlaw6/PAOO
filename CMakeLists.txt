@@ -15,4 +15,6 @@ else()
     endif()    
 endif()
 
-add_executable(${myproject} src/main.cpp)
+add_executable(${myproject} inc/lock.hpp 
+               inc/shapes.hpp 
+               src/main.cpp)
